@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+
+<!-- @if NODE_ENV='build' -->
+    <link rel="stylesheet" href="./assets/css/style.min.css">
+<!-- @endif -->
+
+<!-- @if NODE_ENV='watch' -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+<!-- @endif -->
+</head>
+<body class="flex flex-column">
+
+    <header class="header">
+            
+        <div class="wrapper header-body">
+            <div class="left_column">
+                //= ./contents/header-lists.html
+            </div>
+
+            <div class="center_column">
+                <a href="/" class="site-title"><span>read</span><span>boods</span></a>
+            </div>
+
+            <div class="right_column">
+                <a href="./auth.html" class="header-link">Авторизация / Регистрация</a>
+            </div>
+        </div>
+
+    </header>

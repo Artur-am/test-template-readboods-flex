@@ -1,0 +1,44 @@
+{
+  "name": "site_1",
+  "version": "1.0.0",
+  "description": "Example of my git version",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artur-am/Git.git"
+  },
+  "author": "Arthur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Artur-am/Git/issues"
+  },
+  "homepage": "https://github.com/Artur-am/Git#readme",
+  "dependencies": {
+    "gulp-cli": "*",
+    "gulp-style-modules": "*"
+  },
+  "devDependencies": {
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-cache": "*",
+    "gulp-concat": "*",
+    "gulp-imagemin": "*",
+    "gulp-minify": "*",
+    "gulp-minify-css": "*",
+    "gulp-minify-html": "*",
+    "gulp-preprocess": "*",
+    "gulp-rename": "*",
+    "gulp-replace": "*",
+    "gulp-rigger": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-stylus": "*",
+    "gulp-watch": "*",
+    "imagemin-jpeg-recompress": "*",
+    "imagemin-pngquant": "*",
+    "rimraf": "*"
+  }
+}

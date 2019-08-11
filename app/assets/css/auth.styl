@@ -1,0 +1,132 @@
+.form {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: start;
+    justify-content center;
+    text-align: center;
+    background-color: #fff;
+
+    & > .column {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    & .form-grup {
+        width: 50%;
+        margin-top: 14px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+
+        & > .icon {
+            width: 27px;
+            height: 14px;
+            position: absolute;
+            left: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        & .svg-icon {
+            width: 14px;
+            height: 14px;
+            fill: #929594;
+        }
+
+        & input,
+        & textarea {
+            width: 100%;
+            max-width: 100%;
+            padding: 14px 14px 14px 28px;
+            border: none;
+            background-color: #f4f8f7;
+            color: #878988;
+        }
+
+    }
+
+    & .form-link {
+        display: inline-block;
+        margin-top: 17px;
+    }
+
+    & .btn-form {
+        margin-top: 17px;
+    }
+
+}
+
+.form-title {
+    font-size: 2em;
+    color: #3aa9ab;
+    text-align: center;
+
+    & .site-title {
+        font-size: 1em;
+        & > span:nth-child(1){
+            color: #4da6b1;
+        }
+        & > span:nth-child(2){
+            color: #187980;
+        }
+    }
+}
+.form-text {
+    color: #a5a9a8;
+}
+
+.form-link {
+    padding-bottom: 3px;
+    color: #373a3a;
+    text-decoration: none;
+    border-bottom: 2px solid #eff5f3;
+}
+
+.btn-form {
+    width: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 17px;
+    background-color: #3ab19b;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color .3s ease;
+
+    &:hover {
+        color: #000;
+    }
+}
+
+.social-items {
+    display: flex;
+    margin-top: 13px;
+    margin-bottom: 17px;
+    align-items: center;
+    justify-content center;
+    & > a {
+        border-radius: 50%;
+        border: 1px solid #e9edec;
+        margin-right: 7px;
+        transition: border .3s ease, box-shadow .3s ease;
+        & > svg {
+            width: 31px;
+            height: 25px;
+            fill: #000;
+            padding: 7px 4px 5px 4px;
+            transition: fill .3s ease;
+        }
+        &:hover {
+            border-color: $hover;
+            box-shadow: $hover 0 0 3px;
+            & > svg {
+                fill: $hover;
+            }
+        }
+    }
+}
