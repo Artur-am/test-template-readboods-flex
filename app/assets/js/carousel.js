@@ -1,49 +1,80 @@
 function Carousel(carousel){
 
-    let carouselBody = carousel.getElementsByClassName("carousel-body")[0];
+    let carouselBody = carousel.getElementsByClassName('carousel-body')[0];
+    let items = carouselBody.children;
 
-    let maxPostId = 0;
-    let classNameNavItem = "active";
+    let itemInfo = ( items[0].clientWidth + getCSSProperty( items[0], "marginRight" ) );
 
-    function ClicledItem(ev, el){
-        el = el != window ? el : null;
+    let classNameNavItemActive = "active";
+    let scrollN = 1;
+
+    let scroll_start = 0;
+    let scroll_end = ~~( carouselBody.clientWidth / itemInfo );
+    let previousId = 0;
+
+    function Clicked( ev, el ){
+
         let id = 0;
-        let items = carousel.querySelectorAll(".carouse-nav > ul > li");
-
-        for(let item of items){
+        for( let item of carousel.querySelectorAll(".carousel-nav > ul > li") ){
             if(el == item){
                 break;
             }
             id++;
         }
 
+        scroll_start = id;
+
+        if(previousId > id){
+            scroll_end -= previousId - id;
+        }else{
+            scroll_end += ( id - previousId);
+        }
+        
+        Update();
+        previousId = id;
+    }
+
+    function Update(){
         let n = 0;
-        for(let item of carouselBody.children){
-            if(n < id){
-                item.classList.add("hidden");
+
+        for( let item of items ){
+            if(
+                (scroll_start > n) ||
+                ((scroll_end - 1) < n)
+            ){
+                item.classList.add('hidden');
             }else{
-                if( ((maxPostId - 1) > n ) || ( ((maxPostId - 1) + id) >= n) ){
-                    item.classList.remove("hidden");
-                }else{
-                    item.classList.add("hidden");
-                }
+                item.classList.remove('hidden');
             }
             n++;
         }
 
-        let removeClass = carousel.querySelector(".carouse-nav > ul > li.active");
-        if(removeClass){
-            removeClass.classList.remove(classNameNavItem);
+        let removeClassName = carousel.querySelectorAll('.carousel-nav-circle.' + classNameNavItemActive)[0];
+
+        if(removeClassName){
+            removeClassName.classList.remove(classNameNavItemActive);
         }
-        items[id].classList.add(classNameNavItem);
+        carousel.querySelectorAll('.carousel-nav-circle')[scroll_start].classList.add(classNameNavItemActive);
     }
 
-    function CreateCarouselNavigation(){
+    function CreateNav(){
 
-        let pushObjItem = function(className){
-            return { "tag" : "li", "attribute" : { "class" : "carousel-nav-circle" + className }, "content" : "", "event" : { "click" : function(ev){ ClicledItem(ev, this) }  } };
+        let hiddenCount = items.length - scroll_end;
+
+        let navItems = carousel.getElementsByClassName("carousel-nav")[0];
+
+        let navItem = function(){
+            return {
+                "tag" : "li",
+                "attribute" : {
+                    "class" : 'carousel-nav-circle'
+                },
+                "content" : "",
+                "event" : {
+                    "click" : function(ev){ Clicked(ev, this) }
+                }
+            };
         };
-
         let data = {
             "el" : {
                 "tag" : "ul",
@@ -51,41 +82,30 @@ function Carousel(carousel){
             }
         };
 
-        for(let n = 0, countItem = carouselBody.children.length - (maxPostId - 1); n < countItem; n++){
-            data.el.el.push( pushObjItem( (n == 0) ? " " +classNameNavItem : "") );
+        for(let n = 0, count = hiddenCount / scrollN; n <= count; n++){
+
+            data.el.el.push( navItem() );
+
         }
 
-        HTMLRender(carousel.getElementsByClassName("carouse-nav")[0], data);
-    }
-
-    function CarouselScroll(){
-        let parentWidth = carouselBody.clientWidth;
-        let marginRight = getCSSProperty( carouselBody.children[0], "marginRight" );
-        let itemWidth = marginRight + carouselBody.children[0].clientWidth;
-    
-        maxPostId = ~~(parentWidth / itemWidth );
-
-        for(let n = maxPostId, length = carouselBody.children.length; n < length; n++){
-            carouselBody.children[n].classList.add("hidden");
+        if(navItems.children.length > 0){
+            ClearElement(navItems);
         }
 
+        HTMLRender(navItems, data);
+
+        Update();
     }
 
     function Media(){
-        if(carousel.getElementsByClassName("carouse-nav")[0]){
-            ClearElement(
-                carousel.getElementsByClassName("carouse-nav")[0]
-            );
-        }
-        for(let n = 0, length = carouselBody.children.length; n < length; n++){
-            carouselBody.children[n].classList.remove("hidden");
-        }
-        CarouselScroll();
-        CreateCarouselNavigation();
+        scroll_start = 0;
+        previousId = scroll_start;
+        scroll_end = ~~( carouselBody.clientWidth / itemInfo );
+
+        CreateNav();
     }
 
-    CarouselScroll();
-    CreateCarouselNavigation();
+    CreateNav();
 
     resize.push({
         "fun" : function(){ Media(); }
